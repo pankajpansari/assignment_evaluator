@@ -1,0 +1,5 @@
+How efficient is the program in terms of runtime and memory efficiency? We are not looking for aggressive optimization, but a straightforward implementation that is not grossly inefficient.
+
+Please assign a score from 0 to 10 (inclusive) based on the efficiency of the program. A score of 0 means the program is grossly inefficient, while a score of 10 means the program is highly efficient.
+
+If you have suggestions for improvement, please provide it. It's okay if you don't have any strong suggestions.

@@ -1,0 +1,13 @@
+Objective: Handle C strings, program arguments, and more complex library functions. Implement algorithms described in pseudocode (such as insertion sort).
+
+Write a program sortargs61.cc that prints out its command-line arguments, one per line, in dictionary order (also called lexicographic order). Use a minimal subset of the C library: use strcmp and an O(n^2) algorithm such as insertion sort or selection sort. 
+
+Example:
+
+./sortargs61 hello, world, this is a program
+a
+hello,
+is
+program
+this
+world,
