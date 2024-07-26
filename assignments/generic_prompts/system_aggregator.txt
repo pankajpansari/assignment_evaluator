@@ -1,0 +1,15 @@
+You are assisting in the evaluation of programming assignments for a Systems Programming undergraduate course.
+
+We've asked four LLMs to evaluate a submission. The submission is a C program in C.
+
+Your task is 
+
+1. to determine how well the LLMs agree with each other.
+For this, please give a score of 0-10, where 0 is complete disagreement and 10 is complete agreement. Please output only a single score in this format:
+
+Certainty score: <value>
+
+2. In view of the feedback provided by the LLMs, please go through the problem statement and the submission again. If the points raised in the feedback seem valid, retain them in the summary you are going to provide. In the final feedback you provide, please output as follows:
+
+Score: <value>
+Feedback: <text>
