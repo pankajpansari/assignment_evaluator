@@ -1,0 +1,13 @@
+How good is the program is terms of the choice of data structures? We are looking for the following:
+
+1. data structures are well-chosen and appropriate
+2. no redundant storage/copying of data
+3. no global variables
+
+If there are positive aspects of the program that contribute to its good choice of data structures, please highlight them. 
+
+Please assign a score from 0 to 10 (inclusive) based on how good the program is in terms of the choice of data structures. A score of 0 means the program has made poor choices, while a score of 10 means the program has made excellent choices. 
+
+If you have suggestions for improvement, please provide it. It's okay if you don't have any strong suggestions.
+
+

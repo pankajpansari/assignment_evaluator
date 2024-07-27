@@ -1,0 +1,18 @@
+How well organized and designed is the structure of the program? We are looking for the following:
+
+1. program flow decomposed into manageable, logical pieces
+2. function interfaces are clean and well-encapsulated
+3. appropriate algorithms used, coded cleanly
+4. common code is unified, not duplicated
+    a. when you need same lines more the once, don't copy and paste -- unify!
+5. use standard library functions rather than re-implement that functionality, e.g.
+    b. string manipulation, formatted I/O, sort/search, type conversion, etc.
+
+If there are positive aspects of the program that contribute to its good design, please highlight them. 
+
+Please assign a score from 0 to 10 (inclusive) based on how well-designed the program is. A score of 0 means the program is poorly designed, while a score of 10 means the program is extremely well-designed.
+
+If you have suggestions for improvement, please provide it. It's okay if you don't have any strong suggestions.
+
+
+

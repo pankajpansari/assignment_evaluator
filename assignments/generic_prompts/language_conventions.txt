@@ -1,0 +1,16 @@
+How good is the program in terms of following C language conventions? We are looking for the following:
+
+1. choose the most clean, direct, conventional syntax available to you, e.g. ptr->field instead of (*ptr).field
+2. be thoughtful/consistent in use of array subscripts versus pointer arithmetic
+    a. functionally equivalent but more common to use subscript when accessing an individual array element, pointer arithmetic when accessing subarray
+3. avoid unnecessary use of obscure constructs (such as comma operator, unions)
+4. use standard language features appropriately, e.g.
+    a. bool type from stdbool.h, static qualifier on private functions, const for read-only pointers
+    
+If there are positive aspects of the program that indicate its following C language conventions, please highlight them. 
+
+Please assign a score from 0 to 10 (inclusive) based on how well it follows the C language conventions. A score of 0 means the program does not follow at all, while a score of 10 means the program follows the conventions perfectly. 
+
+If you have suggestions for improvement, please provide it. It's okay if you don't have any strong suggestions.
+
+

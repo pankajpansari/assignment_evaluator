@@ -1,0 +1,24 @@
+How clean and readable is the program? We are looking for the following:
+
+1. code is free of clutter: remove all dead code and unused variables and functions
+2. use of whitespace/indentation is tidy and consistent
+    a. split long lines if necessary (screenwidth ~120 chars)
+    b. 2-4 spaces per indent level (use spaces to indent instead of tabs to avoid editor inconsistency)
+    c. whitespace used to visually support logical separation
+3. variable/function names are consistent and descriptive
+    a. good naming conventions help avoid need for additional commentary
+    b. use consistent scheme for capitalization/underscores
+4. use constants/#define'd/sizeof instead of hardcoded numbers
+5. comments are present where warranted, prose is correct and helpful
+    a. overview comments (per-function, per-module) with summary highlights
+    b. inline comments used sparingly where needed to decipher dense/complex lines
+    c. no excess verbiage that reiterates what code itself already says
+
+If there are positive aspects of the program that contribute to its readability and cleanliness, please highlight them. 
+
+Please assign a score from 0 to 10 (inclusive) based on the readability of the program. A score of 0 means the program is grossly unreadable, while a score of 10 means the program is highly readable and clean.
+
+If you have suggestions for improvement, please provide it. It's okay if you don't have any strong suggestions.
+
+        
+

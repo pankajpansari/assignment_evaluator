@@ -1,0 +1,17 @@
+How well does this C program handle pointers and memory? We are looking for the following:
+
+1. no unnecessary levels of indirection in variable/parameter declarations
+2. uses specific pointee type whenever possible, void* only where required
+3. low-level pointer manipulation/raw memory ops used only when required
+4. allocation uses appropriate storage (stack versus heap, based on requirements)
+5. allocations are of appropriate size
+6. use typecasts only and exactly where necessary and appropriate
+
+If there are positive aspects of the program that contribute to its good handling of memory and pointers, please highlight them. 
+
+Please assign a score from 0 to 10 (inclusive) based on the how well the program handles memory and pointers. A score of 0 means the program handles poorly, while a score of 10 means the program handles extremely well. 
+
+If you have suggestions for improvement, please provide it. It's okay if you don't have any strong suggestions.
+
+        
+
