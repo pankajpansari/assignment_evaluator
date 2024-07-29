@@ -1,49 +1,45 @@
 assignment:
-  name: cs61_pset0
-  problem_file: sort_argument.txt
-  solution_file: sortargs61.cc
+  problem_file: assignments/sort_argument.txt
+  solution_file: assignments/sort_argument.cc
+  output_path: assignments/
 
 proposers:
-  system_prompt: system_proposer.txt
+  system_prompt: prompts/system_proposer.txt
   models:
-    - name: claude-3-5-sonnet-20240620
+    - name: claude-3-haiku-20240307
       type: claude
-    - name: mistralai/Mixtral-8x22B-Instruct-v0.1
+    - name: mistralai/Mistral-7B-Instruct-v0.3
       type: mixtral
-    - name: meta-llama/Meta-Llama-3.1-405B-Instruct-Turbo
+    - name: meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo
       type: llama
+    - name: gpt-4o-mini
+      type: gpt
 
 aggregator:
-  system_prompt: system_aggregator.txt
+  system_prompt: prompts/system_aggregator.txt
   model:
-    name: claude-3-5-sonnet-20240620
+    name: claude-3-haiku-20240307
     type: claude
 
 annotator:
-  system_prompt: system_annotator.txt
+  system_prompt: prompts/system_annotator.txt
   model:
-    name: claude-3-5-sonnet-20240620
+    name: claude-3-haiku-20240307
     type: claude
 
 parameters:
   - name: efficiency
-    prompt_file: efficiency.txt
-  - name: cleanliness
-    prompt_file: cleanliness.txt
-  - name: language_conventions
-    prompt_file: language_conventions.txt
-  - name: design
-    prompt_file: design.txt
-  - name: data_structures
-    prompt_file: data_structures.txt
-  - name: memory
-    prompt_file: memory.txt
-
-paths:
-  base: assignments
-  problem: problem
-  submissions: submissions
-  output: output
+    prompt_file: prompts/efficiency.txt
+#  - name: cleanliness
+#    prompt_file: prompts/cleanliness.txt
+#  - name: language_conventions
+#    prompt_file: prompts/language_conventions.txt
+#  - name: design
+#    prompt_file: prompts/design.txt
+#  - name: data_structures
+#    prompt_file: prompts/data_structures.txt
+#  - name: memory
+#    prompt_file: prompts/memory.txt
 
 api_keys:
   anthropic: ${ANTHROPIC_API_KEY}

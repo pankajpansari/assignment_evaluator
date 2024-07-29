@@ -5,15 +5,15 @@ from anthropic import Anthropic
 from openai import OpenAI
 from together import Together
 from config_loader import CONFIG
+from pathlib import Path
 
 class BaseLLM:
     def __init__(self, model: dict, parameter: dict):
         self.model = model
         self.parameter = parameter['name']
-        self.base_path = Path(CONFIG['paths']['base'])
-        self.problem_path = self.base_path / CONFIG['assignment']['name'] / CONFIG['paths']['problem'] / CONFIG['assignment']['problem_file']
-        self.solution_path = self.base_path / CONFIG['assignment']['name'] / CONFIG['paths']['submissions'] / 'sub_1' / CONFIG['assignment']['solution_file']
-        self.output_path = self.base_path / CONFIG['assignment']['name'] / CONFIG['paths']['submissions'] / 'sub_1' / 'output'
+        self.problem_path = CONFIG['assignment']['problem_file']
+        self.solution_path = CONFIG['assignment']['solution_file']
+        self.output_path = CONFIG['assignment']['output_path']
         os.makedirs(self.output_path, exist_ok=True)
 
     def get_client(self) -> Any:
@@ -54,7 +54,7 @@ class BaseLLM:
             )
 
     def write_output(self, response: Dict[str, Any], output_filename: str):
-        output_file = self.output_path / output_filename 
+        output_file = Path(self.output_path) / output_filename 
         if isinstance(self.get_client(), Anthropic):
             content = response.content[0].text
         else:
@@ -63,7 +63,6 @@ class BaseLLM:
         os.makedirs(output_file.parent, exist_ok=True)
         with open(output_file, 'w', encoding = 'utf-8') as f:
             f.write(f"{self.model['name']}\n")
-            f.write(f"{CONFIG['assignment']['name']}\n")
             f.write(f"{self.parameter}\n")
             f.write(content)
 

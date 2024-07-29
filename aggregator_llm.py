@@ -1,19 +1,22 @@
 from base_llm import BaseLLM
-from config_loader import CONFIG
+from config_loader import CONFIG 
+from pathlib import Path
 
 class AggregatorLLM(BaseLLM):
     def __init__(self, model: dict, parameter: dict):
         super().__init__(model, parameter)
-        self.system_prompt_path = self.base_path / 'generic_prompts' / f"{CONFIG['aggregator']['system_prompt']}"
-        self.output_filename = f"aggregator_{model['type']}_{self.parameter}.txt"
+        self.system_prompt_path = f"{CONFIG['aggregator']['system_prompt']}"
+        output_prefix = CONFIG['assignment']['problem_file'].split('/')[1].split('.')[0]  
+        self.output_filename = f"{output_prefix}_aggregator_{model['type']}_{self.parameter}.txt"
    
     def create_message_content(self) -> str:
         problem_statement = self.read_file(self.problem_path)
         program_solution = self.read_file(self.solution_path)
 
         proposals = []
+        output_prefix = CONFIG['assignment']['problem_file'].split('/')[1].split('.')[0]  
         for model in CONFIG['proposers']['models']:
-            proposals.append(self.read_file(self.output_path / f"proposer_{model['type']}_{self.parameter}.txt"))
+            proposals.append(self.read_file(Path(self.output_path) / f"{output_prefix}_proposer_{model['type']}_{self.parameter}.txt"))
 
         proposal_prompt = ''
         for i, proposal in enumerate(proposals):
