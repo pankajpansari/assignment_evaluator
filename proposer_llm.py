@@ -1,19 +1,12 @@
 from base_llm import BaseLLM
+from config_loader import CONFIG
 
 class ProposerLLM(BaseLLM):
-    def __init__(self, config):
-        super().__init__(config)
-        self.parameter_prompt_path = self.base_path / 'generic_prompts' / f"{self.config['parameter']}.txt"
-        self.system_prompt_path = self.base_path / 'generic_prompts' / 'system_proposer.txt'
-        model = ''
-        if self.config['model'].startswith('meta-llama'):
-            model = 'llama'
-        elif self.config['model'].startswith('mistralai'):
-            model = 'mixtral'
-        elif self.config['model'].startswith('claude'):
-            model = 'claude'
-
-        self.output_filename = f"proposer_{model}_{self.config['parameter']}.txt"
+    def __init__(self, model: dict, parameter: dict):
+        super().__init__(model, parameter)
+        self.parameter_prompt_path = self.base_path / 'generic_prompts' / f"{parameter['prompt_file']}"
+        self.system_prompt_path = self.base_path / 'generic_prompts' / f"{CONFIG['proposers']['system_prompt']}"
+        self.output_filename = f"proposer_{model['type']}_{parameter['name']}.txt"
 
     def create_message_content(self) -> str:
         problem_statement = self.read_file(self.problem_path)
@@ -23,12 +16,3 @@ class ProposerLLM(BaseLLM):
         return (f"Problem statement : {problem_statement}\n\n"
                 f"Code to evaluate : {program_solution}\n\n"
                 f"Parameter to assess : {parameter_prompt}")
-
-if __name__ == '__main__':
-    config = {
-        'model' : 'gpt-3.5-turbo',
-        'parameter' : 'efficiency',
-        'assignment_name' : 'cs61_pset0',
-    }
-    proposer = ProposerLLM(config)
-    proposer.run()

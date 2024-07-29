@@ -4,19 +4,22 @@ from typing import Any, Dict
 from anthropic import Anthropic
 from openai import OpenAI
 from together import Together
+from config_loader import CONFIG
 
 class BaseLLM:
-    def __init__(self, config):
-        self.config = config
-        self.base_path = Path('assignments')
-        self.problem_path = self.base_path / self.config['assignment_name'] / 'problem' / 'sort_argument.txt'
-        self.solution_path = self.base_path / self.config['assignment_name'] / 'submissions' / 'sub_1' / 'sortargs61.cc'
-        self.output_path = self.base_path / self.config['assignment_name'] / 'submissions' / 'sub_1' / 'output'
+    def __init__(self, model: dict, parameter: dict):
+        self.model = model
+        self.parameter = parameter['name']
+        self.base_path = Path(CONFIG['paths']['base'])
+        self.problem_path = self.base_path / CONFIG['assignment']['name'] / CONFIG['paths']['problem'] / CONFIG['assignment']['problem_file']
+        self.solution_path = self.base_path / CONFIG['assignment']['name'] / CONFIG['paths']['submissions'] / 'sub_1' / CONFIG['assignment']['solution_file']
+        self.output_path = self.base_path / CONFIG['assignment']['name'] / CONFIG['paths']['submissions'] / 'sub_1' / 'output'
+        os.makedirs(self.output_path, exist_ok=True)
 
     def get_client(self) -> Any:
-       if self.config['model'].startswith('claude'):
+       if self.model['name'].startswith('claude'):
            return Anthropic()
-       elif self.config['model'].startswith('gpt'):
+       elif self.model['name'].startswith('gpt'):
            return OpenAI()
        else:
            return Together() 
@@ -35,7 +38,7 @@ class BaseLLM:
 
         if isinstance(client, Anthropic):
             return client.messages.create(
-                model = self.config['model'],
+                model = self.model['name'],
                 max_tokens = 1000,
                 temperature = 0.0,
                 system = system_prompt,
@@ -43,7 +46,7 @@ class BaseLLM:
             )
         else:
             return client.chat.completions.create(
-                model = self.config['model'], 
+                model = self.model['name'], 
                 messages = [ 
                     {"role": "system", "content": system_prompt},
                     {"role": "user", "content": message_content},
@@ -59,9 +62,9 @@ class BaseLLM:
 
         os.makedirs(output_file.parent, exist_ok=True)
         with open(output_file, 'w', encoding = 'utf-8') as f:
-            f.write(f"{self.config['model']}\n")
-            f.write(f"{self.config['assignment_name']}\n")
-            f.write(f"{self.config['parameter']}\n")
+            f.write(f"{self.model['name']}\n")
+            f.write(f"{CONFIG['assignment']['name']}\n")
+            f.write(f"{self.parameter}\n")
             f.write(content)
 
     def run(self):

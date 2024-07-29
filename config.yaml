@@ -1,0 +1,51 @@
+assignment:
+  name: cs61_pset0
+  problem_file: sort_argument.txt
+  solution_file: sortargs61.cc
+
+proposers:
+  system_prompt: system_proposer.txt
+  models:
+    - name: claude-3-5-sonnet-20240620
+      type: claude
+    - name: mistralai/Mixtral-8x22B-Instruct-v0.1
+      type: mixtral
+    - name: meta-llama/Meta-Llama-3.1-405B-Instruct-Turbo
+      type: llama
+
+aggregator:
+  system_prompt: system_aggregator.txt
+  model:
+    name: claude-3-5-sonnet-20240620
+    type: claude
+
+annotator:
+  system_prompt: system_annotator.txt
+  model:
+    name: claude-3-5-sonnet-20240620
+    type: claude
+
+parameters:
+  - name: efficiency
+    prompt_file: efficiency.txt
+  - name: cleanliness
+    prompt_file: cleanliness.txt
+  - name: language_conventions
+    prompt_file: language_conventions.txt
+  - name: design
+    prompt_file: design.txt
+  - name: data_structures
+    prompt_file: data_structures.txt
+  - name: memory
+    prompt_file: memory.txt
+
+paths:
+  base: assignments
+  problem: problem
+  submissions: submissions
+  output: output
+
+api_keys:
+  anthropic: ${ANTHROPIC_API_KEY}
+  openai: ${OPENAI_API_KEY}
+  together: ${TOGETHER_API_KEY}
