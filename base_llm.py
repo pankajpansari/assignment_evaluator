@@ -1,4 +1,5 @@
 import os
+import logging
 from pathlib import Path
 from typing import Any, Dict
 from anthropic import Anthropic
@@ -6,6 +7,8 @@ from openai import OpenAI
 from together import Together
 from config_loader import CONFIG
 from pathlib import Path
+
+logging = logging.getLogger(__name__)
 
 class BaseLLM:
     def __init__(self, model: dict, parameter: dict):
@@ -26,8 +29,12 @@ class BaseLLM:
 
 
     def read_file(self, file_path: Path) -> str:
-        with open(file_path, 'r') as f:
-            return f.read()
+        try:
+            with open(file_path, 'r') as f:
+                return f.read()
+        except FileNotFoundError:
+            logger.error(f"File not found: {file_path}")
+            raise
     
     def create_message_content(self) -> str:
         raise NotImplementedError("Subclasses must implement this method")

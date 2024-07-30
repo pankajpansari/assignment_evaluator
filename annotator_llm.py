@@ -16,6 +16,6 @@ class AnnotatorLLM(BaseLLM):
         output_prefix = CONFIG['assignment']['problem_file'].split('/')[1].split('.')[0]  
         aggregate_feedback = self.read_file(Path(self.output_path) / f"{output_prefix}_aggregator_{CONFIG['aggregator']['model']['type']}_{self.parameter}.txt")
 
-        return (f"Problem statement : {problem_statement}\n\n"
-                f"Code to evaluate : {program_solution}\n\n"
-                f"Feedback : {aggregate_feedback} \n\n")
+        return (f"<problem> {problem_statement} </problem> \n\n"
+                f"<code> {program_solution} </code> \n\n"
+                f"<data> {aggregate_feedback} </data> \n\n")

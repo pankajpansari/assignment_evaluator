@@ -20,9 +20,9 @@ class AggregatorLLM(BaseLLM):
 
         proposal_prompt = ''
         for i, proposal in enumerate(proposals):
-            proposal_prompt += f"Proposer {i}: {proposal}\n\n"
+            proposal_prompt += f"<data> {proposal} </data>\n\n"
 
-        return (f"Problem statement : {problem_statement}\n\n"
-                f"Code to evaluate : {program_solution}\n\n"
-                f"Parameter to assess : {self.parameter}\n\n"  # no parameter prompt; parameter name is enough
-                f"{proposal_prompt}")
+        return (f"<problem> {problem_statement} \n\n"
+                f"<instruction> Parameter to assess : {self.parameter} </problem> \n\n"  # no parameter prompt; parameter name is enough
+                f"<code> {program_solution} </code> \n\n"
+                f"<proposals> {proposal_prompt} </proposals>")

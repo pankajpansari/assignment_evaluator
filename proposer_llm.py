@@ -15,6 +15,6 @@ class ProposerLLM(BaseLLM):
         program_solution = self.read_file(self.solution_path)
         parameter_prompt = self.read_file(self.parameter_prompt_path)
 
-        return (f"Problem statement : {problem_statement}\n\n"
-                f"Code to evaluate : {program_solution}\n\n"
-                f"Parameter to assess : {parameter_prompt}")
+        return (f"<problem> {problem_statement} </problem> \n\n"
+                f"<code> {program_solution} </code> \n\n"
+                f"<instructions> {parameter_prompt} </instructions>")
