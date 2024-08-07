@@ -1,3 +1,4 @@
+import os
 from base_llm import BaseLLM
 from config_loader import CONFIG 
 from pathlib import Path
@@ -8,6 +9,9 @@ class ProposerLLM(BaseLLM):
         self.parameter_prompt_path = f"{parameter['prompt_file']}"
         self.system_prompt_path = f"{CONFIG['proposers']['system_prompt']}"
         output_prefix = CONFIG['assignment']['problem_file'].split('/')[1].split('.')[0]  
+        self.output_path = CONFIG['assignment']['intermediate_path']
+        if not os.path.exists(self.output_path):
+            os.makedirs(self.output_path)
         self.output_filename = f"{output_prefix}_proposer_{model['type']}_{parameter['name']}.txt"
 
     def create_message_content(self) -> str:

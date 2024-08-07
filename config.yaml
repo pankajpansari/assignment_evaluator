@@ -1,7 +1,8 @@
 assignment:
-  problem_file: assignments/sort_argument.txt
-  solution_file: assignments/sort_argument.cc
-  output_path: assignments/
+  problem_file: data/sort_argument.txt
+  solution_file: data/sort_argument.cc
+  output_path: output
+  intermediate_path: intermediate
 
 proposers:
   system_prompt: prompts/system_proposer.txt
@@ -30,16 +31,16 @@ annotator:
 parameters:
   - name: efficiency
     prompt_file: prompts/efficiency.txt
-#  - name: cleanliness
-#    prompt_file: prompts/cleanliness.txt
-#  - name: language_conventions
-#    prompt_file: prompts/language_conventions.txt
-#  - name: design
-#    prompt_file: prompts/design.txt
-#  - name: data_structures
-#    prompt_file: prompts/data_structures.txt
-#  - name: memory
-#    prompt_file: prompts/memory.txt
+  - name: cleanliness
+    prompt_file: prompts/cleanliness.txt
+  - name: language_conventions
+    prompt_file: prompts/language_conventions.txt
+  - name: design
+    prompt_file: prompts/design.txt
+  - name: data_structures
+    prompt_file: prompts/data_structures.txt
+  - name: memory
+    prompt_file: prompts/memory.txt
 
 api_keys:
   anthropic: ${ANTHROPIC_API_KEY}

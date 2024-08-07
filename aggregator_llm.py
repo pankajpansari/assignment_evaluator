@@ -1,3 +1,4 @@
+import os
 from base_llm import BaseLLM
 from config_loader import CONFIG 
 from pathlib import Path
@@ -7,6 +8,9 @@ class AggregatorLLM(BaseLLM):
         super().__init__(model, parameter)
         self.system_prompt_path = f"{CONFIG['aggregator']['system_prompt']}"
         output_prefix = CONFIG['assignment']['problem_file'].split('/')[1].split('.')[0]  
+        self.output_path = CONFIG['assignment']['intermediate_path']
+        if not os.path.exists(self.output_path):
+            os.makedirs(self.output_path)
         self.output_filename = f"{output_prefix}_aggregator_{model['type']}_{self.parameter}.txt"
    
     def create_message_content(self) -> str:

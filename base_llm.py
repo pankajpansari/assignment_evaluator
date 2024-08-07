@@ -29,12 +29,8 @@ class BaseLLM:
 
 
     def read_file(self, file_path: Path) -> str:
-        try:
-            with open(file_path, 'r') as f:
-                return f.read()
-        except FileNotFoundError:
-            logger.error(f"File not found: {file_path}")
-            raise
+        with open(file_path, 'r') as f:
+            return f.read()
     
     def create_message_content(self) -> str:
         raise NotImplementedError("Subclasses must implement this method")
