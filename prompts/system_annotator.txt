@@ -12,4 +12,8 @@ To easily distinguish your feedback comments from comments originally present in
 // FEEDBACK: Good use of descriptive variable names 
 </example>
 
+Please use <code> </code> tags to separate out the C code portion of your output.
+
+Please give a summary of the feedback in <explanation> </explanation> tags.
+
 It's okay if not all feedback can be annotated, but please include as many annotations as possible. Please ignore the scores.

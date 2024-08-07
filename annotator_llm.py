@@ -1,6 +1,6 @@
 import os
 from base_llm import BaseLLM
-from config_loader import CONFIG 
+from utils import CONFIG 
 from pathlib import Path
 
 class AnnotatorLLM(BaseLLM):

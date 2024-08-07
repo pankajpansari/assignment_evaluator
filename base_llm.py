@@ -5,7 +5,7 @@ from typing import Any, Dict
 from anthropic import Anthropic
 from openai import OpenAI
 from together import Together
-from config_loader import CONFIG
+from utils import CONFIG
 from pathlib import Path
 
 logging = logging.getLogger(__name__)
