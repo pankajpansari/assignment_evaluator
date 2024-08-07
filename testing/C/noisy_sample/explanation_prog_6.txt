@@ -1,0 +1,14 @@
+The modifications made to degrade the code quality include:
+
+1. Removed all comments, reducing readability and understanding of the code's purpose.
+2. Introduced a global variable 'g_s' which is unnecessary and creates potential side effects.
+3. Used goto statements in 'ungets' and 'main' instead of loops, making the code harder to follow.
+4. Removed the 'const' qualifier from the 's' parameter in 'ungets', potentially allowing unintended modifications.
+5. Changed the loop in 'ungets' to count down instead of up, making it slightly less intuitive.
+6. Removed the size_t type for the loop counter in 'ungets', potentially causing issues with very large strings.
+7. Used a cast to remove the 'const' qualifier in 'ungets', which is bad practice and can lead to undefined behavior.
+8. Removed the BUFSIZE check in 'ungets', potentially causing buffer overflows.
+9. Changed the main function to use goto instead of a while loop, making it harder to understand the flow.
+10. Removed meaningful variable names (e.g., changed 's' to 'g_s' in main).
+
+These changes maintain the core functionality but significantly degrade the code quality in terms of readability, efficiency, adherence to conventions, and overall design.

@@ -1,0 +1,24 @@
+The modifications degrade the code quality in several ways:
+
+1. Cleanliness and readability:
+   - Removed all comments
+   - Used single-letter variable names (r, v, p, m, i)
+   - Introduced goto statements for control flow
+
+2. Efficiency:
+   - Added unnecessary memory allocation and deallocation
+   - Stored results in an array before printing, which is not needed
+
+3. Language conventions:
+   - Used global variables (g_x, g_n, g_s) instead of parameters
+   - Renamed the main function to 'rightrot' to 'r'
+
+4. Memory management:
+   - Introduced manual memory allocation and deallocation where it's not needed
+
+5. Overall design:
+   - Removed the size check for the rotation, potentially leading to undefined behavior
+   - Combined multiple operations into single lines
+   - Used magic numbers (700, 49) without explanation
+
+These changes make the code harder to read, understand, and maintain while introducing potential bugs and inefficiencies.

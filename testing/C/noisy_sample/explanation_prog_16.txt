@@ -1,0 +1,21 @@
+The modifications made to degrade the code quality include:
+
+1. Introduced global variables (g_s, g_t, g_i, g_j) to replace local variables in the escape function, reducing readability and making the code less modular.
+
+2. Used goto statements in the escape function instead of a while loop, making the control flow harder to follow.
+
+3. Removed function prototypes for escape and unescape, potentially causing issues with implicit declarations.
+
+4. In the unescape function, used dynamic memory allocation for simple integer variables (i, j, esc_mode) unnecessarily, complicating memory management.
+
+5. Changed the unesc_char function to use a local variable and multiple break statements, making it less efficient and harder to read.
+
+6. Removed the enum bool declaration from the top of the file, potentially causing issues with the YES and NO constants.
+
+7. Kept cryptic variable names like 'c' and 'e', which were present in the original code.
+
+8. Inconsistent formatting and indentation throughout the code.
+
+9. Removed all comments, making the code harder to understand.
+
+These changes maintain the core functionality of the program while degrading its quality in terms of readability, efficiency, adherence to conventions, memory management, and overall design.

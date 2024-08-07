@@ -1,0 +1,14 @@
+The modifications made to degrade the code quality include:
+
+1. Removed all comments, reducing readability.
+2. Introduced global variables (in_comment, in_quote, t, len) instead of using local variables, affecting overall design and potential for side effects.
+3. Created a separate function 'process_char' with excessive use of goto statements, reducing readability and violating structured programming principles.
+4. Used pointer arithmetic in the getline function (*(line + i) instead of line[i]), making it less readable.
+5. Removed the 'extern' keyword from the getline function, potentially causing issues with variable scope.
+6. Removed the author information and problem description from the original comments.
+7. Introduced redundant operations, such as using '!in_quote' instead of 'in_quote = 0' when toggling the quote state.
+8. Used single-letter variable names (t) without clear meaning, reducing readability.
+9. Removed blank lines between logical sections of code, making it harder to read.
+10. Used inconsistent brace placement and indentation.
+
+These changes maintain the core functionality of the program while significantly degrading its quality in terms of cleanliness, readability, efficiency, adherence to language conventions, and overall design.

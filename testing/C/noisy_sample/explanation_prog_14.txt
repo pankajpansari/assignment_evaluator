@@ -1,0 +1,25 @@
+The modifications made to degrade the code quality include:
+
+1. Cleanliness and readability:
+   - Removed all comments
+   - Used cryptic function name 'do_stuff' instead of 'reverse'
+   - Used single-letter variable names where possible
+
+2. Efficiency:
+   - Introduced unnecessary memory allocation and deallocation in main()
+   - Copied data between arrays unnecessarily
+
+3. Language conventions:
+   - Used goto statement instead of a break in the main loop
+   - Mixed declaration and code in the main function
+
+4. Memory management:
+   - Introduced manual memory allocation and deallocation, which is unnecessary for this program
+   - No error handling for malloc failures in do_stuff()
+
+5. Overall design:
+   - Introduced global variables g_line and g_i
+   - Changed function parameters to use pointers instead of arrays
+   - Used pointer arithmetic instead of array indexing in some places
+
+These changes make the code harder to read, understand, and maintain while introducing potential memory leaks and inefficiencies. However, the core functionality of reversing input lines remains intact.

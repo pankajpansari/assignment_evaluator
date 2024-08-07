@@ -1,0 +1,13 @@
+The modifications degrade the code quality in several ways:
+
+1. Cleanliness and readability: Removed comments, used single-letter variable names, and introduced goto statements, making the code harder to follow.
+
+2. Efficiency: Replaced strlen() with manual string length calculations, and introduced unnecessary loops in the init() function.
+
+3. Language conventions: Used global variables extensively, violating encapsulation principles.
+
+4. Memory management: Used fixed-size arrays instead of dynamic memory allocation, potentially wasting memory or causing buffer overflows.
+
+5. Overall design: Split the initialization into a separate function, complicating the program structure. Used goto statements instead of structured programming constructs, making the control flow harder to understand.
+
+The core functionality remains intact, but the code is now much less maintainable and more prone to errors.

@@ -1,0 +1,24 @@
+The modifications degrade the code quality in several ways:
+
+1. Cleanliness and readability:
+   - Removed comments
+   - Used cryptic function names (do_stuff, get_bn)
+   - Introduced unnecessary nesting in do_stuff function
+
+2. Efficiency:
+   - Added redundant memory allocation and copying of argv[0]
+   - Introduced an unnecessary goto statement
+
+3. Language conventions:
+   - Used global variables (g_bn, g_conv) instead of passing parameters
+   - Mixed naming conventions (snake_case and camelCase)
+
+4. Memory management:
+   - Introduced manual memory allocation and deallocation for no good reason
+
+5. Overall design:
+   - Split the logic into multiple functions unnecessarily
+   - Used a magic number (42) for program exit condition
+   - Removed the early return in the original program, making the logic more convoluted
+
+These changes make the code harder to read, understand, and maintain while still preserving the core functionality of the original program.

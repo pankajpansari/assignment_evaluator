@@ -1,0 +1,14 @@
+The modifications made to degrade the code quality include:
+
+1. Removed comments and meaningful function names (e.g., walloc).
+2. Introduced global variables (root, total_words, noise_words) instead of passing them as parameters.
+3. Used a goto statement for error handling in the main function.
+4. Removed the keyfrom function and integrated its functionality directly into the main loop, making it less modular.
+5. Changed the isnoiseword function to use a linear search instead of binary search, reducing efficiency.
+6. Removed the strdup function and replaced it with manual memory allocation and copying.
+7. Removed the walloc function and integrated memory allocation directly into the addword function.
+8. Introduced magic numbers (e.g., 50 for NOISE_WORDS_COUNT) instead of using sizeof to calculate array size.
+9. Removed some error checking (e.g., in malloc calls).
+10. Nested conditionals in the addword function, making it harder to read.
+
+These changes maintain the core functionality but degrade the code quality in terms of readability, efficiency, adherence to conventions, memory management, and overall design.

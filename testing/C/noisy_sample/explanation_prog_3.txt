@@ -1,0 +1,22 @@
+The modifications made to degrade the code quality include:
+
+1. Cleanliness and readability:
+   - Removed all comments
+   - Used cryptic function names (f for itob, r for reverse)
+   - Used single-letter variable names
+
+2. Efficiency:
+   - Introduced a global variable g_l to store string length instead of using strlen()
+
+3. Language conventions:
+   - Used goto statements instead of structured programming constructs
+   - Violated typical C coding conventions (e.g., inconsistent spacing)
+
+4. Memory management:
+   - Used pointer arithmetic instead of array indexing in some places
+
+5. Overall design:
+   - Introduced a global variable g_d for the digits array
+   - Combined multiple operations into single, complex expressions (e.g., in the reverse function)
+
+These changes maintain the core functionality of the program while significantly degrading its quality, making it more challenging to read, understand, and maintain.

@@ -1,0 +1,13 @@
+The modified program degrades code quality in several ways:
+
+1. Cleanliness and readability: Removed comments, used cryptic variable names (x, y, z, a, b, c), and introduced goto statements, making the code harder to follow.
+
+2. Efficiency: Introduced unnecessary function calls (done()) and used goto statements, which can make the code less efficient and harder to optimize.
+
+3. Language conventions: Violated C coding conventions by using global variables excessively and using goto statements instead of structured programming constructs.
+
+4. Overall design: Split the main logic into separate functions unnecessarily, used magic numbers instead of named constants (although defined as macros), and introduced a complex control flow with goto statements.
+
+5. Readability: Removed the semantic explanation for the newline counting at EOF, making the logic less clear.
+
+These changes make the code more challenging to understand, maintain, and debug while still maintaining its core functionality.
