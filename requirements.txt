@@ -1,0 +1,5 @@
+anthropic>=0.31.2
+openai>=1.37.0
+PyYAML>=5.4.1
+together>=1.2.2
+tqdm>=4.66.4

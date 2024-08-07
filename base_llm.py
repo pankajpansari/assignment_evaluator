@@ -1,17 +1,14 @@
 import os
-import logging
 from pathlib import Path
-from typing import Any, Dict
+
 from anthropic import Anthropic
 from openai import OpenAI
 from together import Together
-from utils import CONFIG
-from pathlib import Path
 
-logging = logging.getLogger(__name__)
+from utils import CONFIG
 
 class BaseLLM:
-    def __init__(self, model: dict, parameter: dict):
+    def __init__(self, model, parameter):
         self.model = model
         self.parameter = parameter['name']
         self.problem_path = CONFIG['assignment']['problem_file']
@@ -19,7 +16,7 @@ class BaseLLM:
         self.output_path = CONFIG['assignment']['output_path']
         os.makedirs(self.output_path, exist_ok=True)
 
-    def get_client(self) -> Any:
+    def get_client(self):
        if self.model['name'].startswith('claude'):
            return Anthropic()
        elif self.model['name'].startswith('gpt'):
@@ -28,14 +25,14 @@ class BaseLLM:
            return Together() 
 
 
-    def read_file(self, file_path: Path) -> str:
+    def read_file(self, file_path):
         with open(file_path, 'r') as f:
             return f.read()
     
-    def create_message_content(self) -> str:
+    def create_message_content(self):
         raise NotImplementedError("Subclasses must implement this method")
     
-    def get_model_response(self, client: Any) -> Dict[str, Any]:
+    def get_model_response(self, client):
         system_prompt = self.read_file(self.system_prompt_path)
         message_content = self.create_message_content()
 
@@ -56,7 +53,7 @@ class BaseLLM:
                ],
             )
 
-    def write_output(self, response: Dict[str, Any], output_filename: str):
+    def write_output(self, response, output_filename):
         output_file = Path(self.output_path) / output_filename 
         if isinstance(self.get_client(), Anthropic):
             content = response.content[0].text

@@ -1,10 +1,12 @@
-import time
-from tqdm import tqdm
-import shutil
 from pathlib import Path
-from proposer_llm import ProposerLLM
+import shutil
+import time
+
+from tqdm import tqdm
+
 from aggregator_llm import AggregatorLLM
 from annotator_llm import AnnotatorLLM
+from proposer_llm import ProposerLLM
 from utils import CONFIG, parse_output
 
 def eval():

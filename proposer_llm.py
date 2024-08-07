@@ -1,7 +1,8 @@
 import os
+from pathlib import Path
+
 from base_llm import BaseLLM
 from utils import CONFIG 
-from pathlib import Path
 
 class ProposerLLM(BaseLLM):
     def __init__(self, model: dict, parameter: dict):

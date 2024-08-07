@@ -1,8 +1,8 @@
-import yaml
 import os
 from pathlib import Path
+import yaml
 
-def load_config(config_path: str = 'config.yaml') -> dict:
+def load_config(config_path = 'config.yaml'):
     with open(config_path, 'r') as f:
         config = yaml.safe_load(f)
 
@@ -11,7 +11,7 @@ def load_config(config_path: str = 'config.yaml') -> dict:
 
     return config
 
-def _replace_env_vars(config: dict) -> None:
+def _replace_env_vars(config):
     for key, value in config.items():
         if isinstance(value, dict):
             _replace_env_vars(value)

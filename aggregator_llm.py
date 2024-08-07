@@ -1,10 +1,11 @@
 import os
-from base_llm import BaseLLM
-from utils import CONFIG 
 from pathlib import Path
 
+from base_llm import BaseLLM
+from utils import CONFIG 
+
 class AggregatorLLM(BaseLLM):
-    def __init__(self, model: dict, parameter: dict):
+    def __init__(self, model, parameter):
         super().__init__(model, parameter)
         self.system_prompt_path = f"{CONFIG['aggregator']['system_prompt']}"
         output_prefix = CONFIG['assignment']['problem_file'].split('/')[1].split('.')[0]  
@@ -13,7 +14,7 @@ class AggregatorLLM(BaseLLM):
             os.makedirs(self.output_path)
         self.output_filename = f"{output_prefix}_aggregator_{model['type']}_{self.parameter}.txt"
    
-    def create_message_content(self) -> str:
+    def create_message_content(self):
         problem_statement = self.read_file(self.problem_path)
         program_solution = self.read_file(self.solution_path)
 
