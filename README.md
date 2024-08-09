@@ -32,3 +32,7 @@ The success of automated grading of code quality hinges on these factors:
 2. Quality of the LLMs: Due to the complexity of the assignments, we need to make use of the best LLMs we can. This necessitates the use of LLMs with largest parameter counts available to us. We choose to use a mix of Llama 3.1 405B Instruct Turbo, GPT-4o, Mixtral-8x22B Instruct (141B), and Claude 3.5 Sonnet.
 
 3. Mixture of Agents approach: We aggregrate the responses from multiple LLMs to get a more robust and reliable feedback. The multiple feedbacks help us estimate uncertainty; this enables manual intervention in cases where the feedback is conflicting. We also make use of a code completion LLM to insert comments in the original code at appropriate places.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.

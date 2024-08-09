@@ -1,3 +1,8 @@
+# Copyright (c) Pankaj Pansari 
+#
+# This file is part of program annotator, which is licensed under the MIT License.
+# See the LICENSE file for details.
+
 import pathlib
 import shutil
 import time

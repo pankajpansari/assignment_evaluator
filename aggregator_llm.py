@@ -1,3 +1,7 @@
+# Copyright (c) 2024 Pankaj Pansari 
+#
+# This file is part of program annotator, which is licensed under the MIT License.
+# See the LICENSE file for details.
 import os
 import pathlib
 
