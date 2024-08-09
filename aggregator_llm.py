@@ -1,15 +1,15 @@
 import os
-from pathlib import Path
+import pathlib
 
-from base_llm import BaseLLM
-from utils import CONFIG 
+import base_llm
+import utils
 
-class AggregatorLLM(BaseLLM):
+class AggregatorLLM(base_llm.BaseLLM):
     def __init__(self, model, parameter):
         super().__init__(model, parameter)
-        self.system_prompt_path = f"{CONFIG['aggregator']['system_prompt']}"
-        output_prefix = CONFIG['assignment']['problem_file'].split('/')[1].split('.')[0]  
-        self.output_path = CONFIG['assignment']['intermediate_path']
+        self.system_prompt_path = f"{utils.CONFIG['aggregator']['system_prompt']}"
+        output_prefix = utils.CONFIG['assignment']['problem_file'].split('/')[1].split('.')[0]  
+        self.output_path = utils.CONFIG['assignment']['intermediate_path']
         if not os.path.exists(self.output_path):
             os.makedirs(self.output_path)
         self.output_filename = f"{output_prefix}_aggregator_{model['type']}_{self.parameter}.txt"
@@ -19,9 +19,9 @@ class AggregatorLLM(BaseLLM):
         program_solution = self.read_file(self.solution_path)
 
         proposals = []
-        output_prefix = CONFIG['assignment']['problem_file'].split('/')[1].split('.')[0]  
-        for model in CONFIG['proposers']['models']:
-            proposals.append(self.read_file(Path(self.output_path) / f"{output_prefix}_proposer_{model['type']}_{self.parameter}.txt"))
+        output_prefix = utils.CONFIG['assignment']['problem_file'].split('/')[1].split('.')[0]  
+        for model in utils.CONFIG['proposers']['models']:
+            proposals.append(self.read_file(pathlib.Path(self.output_path) / f"{output_prefix}_proposer_{model['type']}_{self.parameter}.txt"))
 
         proposal_prompt = ''
         for i, proposal in enumerate(proposals):

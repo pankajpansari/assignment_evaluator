@@ -1,28 +1,28 @@
 import os
-from pathlib import Path
+import pathlib
 
-from anthropic import Anthropic
-from openai import OpenAI
-from together import Together
+import anthropic
+import openai
+import together
 
-from utils import CONFIG
+import utils
 
 class BaseLLM:
     def __init__(self, model, parameter):
         self.model = model
         self.parameter = parameter['name']
-        self.problem_path = CONFIG['assignment']['problem_file']
-        self.solution_path = CONFIG['assignment']['solution_file']
-        self.output_path = CONFIG['assignment']['output_path']
+        self.problem_path = utils.CONFIG['assignment']['problem_file']
+        self.solution_path = utils.CONFIG['assignment']['solution_file']
+        self.output_path = utils.CONFIG['assignment']['output_path']
         os.makedirs(self.output_path, exist_ok=True)
 
     def get_client(self):
        if self.model['name'].startswith('claude'):
-           return Anthropic()
+           return anthropic.Anthropic()
        elif self.model['name'].startswith('gpt'):
-           return OpenAI()
+           return openai.OpenAI()
        else:
-           return Together() 
+           return together.Together() 
 
 
     def read_file(self, file_path):
@@ -36,7 +36,7 @@ class BaseLLM:
         system_prompt = self.read_file(self.system_prompt_path)
         message_content = self.create_message_content()
 
-        if isinstance(client, Anthropic):
+        if isinstance(client, anthropic.Anthropic):
             return client.messages.create(
                 model = self.model['name'],
                 max_tokens = 1000,
@@ -54,8 +54,8 @@ class BaseLLM:
             )
 
     def write_output(self, response, output_filename):
-        output_file = Path(self.output_path) / output_filename 
-        if isinstance(self.get_client(), Anthropic):
+        output_file = pathlib.Path(self.output_path) / output_filename 
+        if isinstance(self.get_client(), anthropic.Anthropic):
             content = response.content[0].text
         else:
             content = response.choices[0].message.content

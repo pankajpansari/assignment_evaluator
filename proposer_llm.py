@@ -1,16 +1,16 @@
 import os
-from pathlib import Path
+import pathlib
 
-from base_llm import BaseLLM
-from utils import CONFIG 
+import base_llm
+import utils
 
-class ProposerLLM(BaseLLM):
+class ProposerLLM(base_llm.BaseLLM):
     def __init__(self, model: dict, parameter: dict):
         super().__init__(model, parameter)
         self.parameter_prompt_path = f"{parameter['prompt_file']}"
-        self.system_prompt_path = f"{CONFIG['proposers']['system_prompt']}"
-        output_prefix = CONFIG['assignment']['problem_file'].split('/')[1].split('.')[0]  
-        self.output_path = CONFIG['assignment']['intermediate_path']
+        self.system_prompt_path = f"{utils.CONFIG['proposers']['system_prompt']}"
+        output_prefix = utils.CONFIG['assignment']['problem_file'].split('/')[1].split('.')[0]  
+        self.output_path = utils.CONFIG['assignment']['intermediate_path']
         if not os.path.exists(self.output_path):
             os.makedirs(self.output_path)
         self.output_filename = f"{output_prefix}_proposer_{model['type']}_{parameter['name']}.txt"
