@@ -2,6 +2,16 @@
 #
 # This file is part of program annotator, which is licensed under the MIT License.
 # See the LICENSE file for details.
+""" Module defines the BaseLLM class which is the base class for Proposer, Aggregator, and Annotator classes.
+
+This class provides the common functionality for Proposer, Aggregator, and Annotator classes such as
+reading files, creating message content for LLM API, getting model response, and writing output.
+
+Typical usage example:
+
+    import base_llm
+    class DerivedLLM(base_llm.BaseLLM)
+"""
 import os
 import pathlib
 

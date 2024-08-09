@@ -2,6 +2,18 @@
 #
 # This file is part of program annotator, which is licensed under the MIT License.
 # See the LICENSE file for details.
+"""AggregatorLLM class calls given model to aggregate feedback obtained from multiple proposers.
+
+This class is used for the second stage of the evaluation. Proposers might be incorrect at times,
+or may generate conflicting feedback. The AggregatorLLM class is used to aggregate the feedback,
+evaluating the proposer feedbacks for consistency and accuracy.
+
+Typical usage example:
+    
+        import aggregator_llm
+        aggregator = aggregator_llm.AggregatorLLM(model, parameter)
+        aggregator.run()
+"""
 import os
 import pathlib
 

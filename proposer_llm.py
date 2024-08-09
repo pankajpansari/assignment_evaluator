@@ -2,6 +2,17 @@
 #
 # This file is part of program annotator, which is licensed under the MIT License.
 # See the LICENSE file for details.
+""" ProposerLLM class calls given model for feedback on the given parameter.
+
+This class is used for the first stage of the evaluation. We instantiate a ProposerLLM object
+based on given model and evaluation parameters. There are multiple proposers in the first stage.
+
+Typical usage example:
+    
+        import proposer_llm
+        proposer = proposer_llm.ProposerLLM(model, parameter)
+        proposer.run()
+"""
 import os
 import pathlib
 

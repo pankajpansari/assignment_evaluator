@@ -2,6 +2,19 @@
 #
 # This file is part of program annotator, which is licensed under the MIT License.
 # See the LICENSE file for details.
+"""AnnotatorLLM class generates feedback annotations in program and a summary explanation. 
+
+This class is used for the third and final stage of the evaluation. The output of the aggregator
+is used to pin-point in the code the positive/negative aspects of implementation. A short explanation
+summary of the feedback is also generated.
+
+Typical usage example:
+    
+        import annotator_llm
+        annotator = annotator_llm.AnnotatorLLM(model, parameter)
+        annotator.run()
+"""
+
 import os
 import pathlib
 

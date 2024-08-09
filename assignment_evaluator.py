@@ -3,6 +3,16 @@
 # This file is part of program annotator, which is licensed under the MIT License.
 # See the LICENSE file for details.
 
+"""Main call script for the program annotator evaluator.
+
+This script runs the program annotator evaluator (Proposer, Aggregator, and Annotator)
+on the given program assignment with respect to the parameters in the configuration file. 
+
+Typical usage example:
+
+    $ python assignment_evaluator.py
+"""
+
 import pathlib
 import shutil
 import time
