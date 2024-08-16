@@ -22,7 +22,34 @@ import base_llm
 import utils
 
 class AnnotatorLLM(base_llm.BaseLLM):
+    """ Extends BaseLLM class to implement AnnotatorLLM class.
+
+    Creates custom prompt to annotate the input program file based on aggregated 
+    feedback obtained from aggregator. The user prompt includes the problem statement,
+    the program solution, and the aggregated feedback. The system prompt tells exactly
+    what the model is expected to do. The output is saved in an intermediate log file.
+    
+    Attributes:
+        system_prompt_path: A string containing the path to file describing 
+            what the annotator is expected to do.
+        output_path: A string listing the directory where the annotated result is saved.
+        output_filename: A string giving the filename of result. The filename indicates
+            the program name (being evaluated) and the parameter name.
+    """
     def __init__(self, model, parameter):
+        """ Initializes the instance based on CONFIG settings; also sets which
+        LLM acts as annotator and which parameter is being evaluated (derived
+        from parent).
+        
+        Args:
+            model: A dictionary containing the model name (eg. claude-3-haiku-20240307)
+                and type (eg. claude)
+            parameter: A dictionary containing the parameter name and the path to
+                the respective prompt file which describes the parameter.
+        
+        Returns:
+            None
+        """
         super().__init__(model, parameter)
         self.system_prompt_path = f"{utils.CONFIG['annotator']['system_prompt']}" 
         self.parameter_prompt_path = f"{parameter['prompt_file']}"
@@ -37,6 +64,18 @@ class AnnotatorLLM(base_llm.BaseLLM):
                                 f"{model['type']}_{parameter['name']}.txt")
 
     def create_message_content(self):
+        """ Creates the user prompt to be used for the annotator LLM. The prompt
+        includes the problem statement, the program solution, and the aggregated
+        feedback from the aggregator. System prompt asks the model to respond with
+        <code> and <explanation> tags. This helps in parsing the output and saving
+        the annotated program and explanation in separate files.
+        
+        Args:
+            None
+
+        Returns:
+            A string containing the user prompt to be used for the annotator LLM.
+        """
         problem_statement = self.read_file(self.problem_path)
         program_solution = self.read_file(self.solution_path)
         output_prefix = utils.CONFIG['assignment']['problem_file'].split('/')[1].split('.')[0]  

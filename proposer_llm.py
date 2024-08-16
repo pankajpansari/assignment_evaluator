@@ -20,7 +20,36 @@ import base_llm
 import utils
 
 class ProposerLLM(base_llm.BaseLLM):
+    """ Extends BaseLLM class to implement ProposerLLM class.
+    
+    Creates custom prompt to obtain initial feedback (proposals) from variety 
+    of LLMs (given in config). The user prompt includes the problem statement, 
+    the program solution, and the parameter being evaluated. The system prompt 
+    tells exactly what the model is expected to do. The output is saved in an 
+    intermediate log file. 
+
+    Attributes:
+        parameter_prompt_path: A string containing the path to file describing 
+            the evaluation parameter.
+        system_prompt_path: A string containing the path to file describing
+            what the model is expected to do.
+        output_path: A string listing the directory where the result is saved.
+        output_filename: A string giving the filename of result. The filename indicates
+            the program name (being evaluated) and the parameter name.
+    """
     def __init__(self, model, parameter):
+        """ Initializes the instance based on CONFIG settings; also based on
+        LLM model name and parameter to be evaluated (these coming from parent class)
+        
+        Args:
+            model: A dictionary containing the model name (eg. claude-3-haiku-20240307)
+                and type (eg. claude)
+            parameter: A dictionary containing the parameter name and the path to
+                the respective prompt file which describes the parameter.
+        
+        Returns:
+            None 
+        """
         super().__init__(model, parameter)
         self.parameter_prompt_path = f"{parameter['prompt_file']}"
         self.system_prompt_path = f"{utils.CONFIG['proposers']['system_prompt']}"
@@ -33,7 +62,17 @@ class ProposerLLM(base_llm.BaseLLM):
             f"_{parameter['name']}.txt"
         )
 
-    def create_message_content(self) -> str:
+    def create_message_content(self):
+        """ Creates the user prompt to be be used for the proposer LLM
+        for this parameter evaluation. Prompt includes the problem statement,
+        the program solution, and instructions about parameter eval. 
+        
+        Args:
+            None
+        
+        Returns:
+            A string containing the user prompt for the proposer LLM.
+        """
         problem_statement = self.read_file(self.problem_path)
         program_solution = self.read_file(self.solution_path)
         parameter_prompt = self.read_file(self.parameter_prompt_path)

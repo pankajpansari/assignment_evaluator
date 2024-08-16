@@ -21,7 +21,37 @@ import base_llm
 import utils
 
 class AggregatorLLM(base_llm.BaseLLM):
+    """ Extends the BaseLLM class to implement AggregatorLLM class.
+
+    Creates custom prompt to aggregate the feedback (proposals) obtained from 
+    first stage. An individual LLM can make a mistake. The aggregation ensure
+    that the feedback is consistent and accurate. The user prompt includes the
+    problem statement, the program solution, name of parameter being evaluated,
+    and all the proposals from the first stage. The system prompt tells exactly
+    what the model is expected to do. The output is saved in an intermediate 
+    log file.
+
+    Attributes:
+        system_prompt_path: A string containing the path to file describing 
+            what the aggregator is expected to do.
+        output_path: A string listing the directory where the aggregated result is saved.
+        output_filename: A string giving the filename of result. The filename indicates
+            the program name (being evaluated) and the parameter name.
+    """
     def __init__(self, model, parameter):
+        """ Initializes the instance based on CONFIG settings; also sets which
+        LLM acts as aggregator and which parameter is being evaluated (derived 
+        from parent).
+
+        Args:
+            model: A dictionary containing the model name (eg. claude-3-haiku-20240307)
+                and type (eg. claude)
+            parameter: A dictionary containing the parameter name and the path to
+                the respective prompt file which describes the parameter.
+        
+        Returns:
+            None
+        """
         super().__init__(model, parameter)
         self.system_prompt_path = f"{utils.CONFIG['aggregator']['system_prompt']}"
         output_prefix = utils.CONFIG['assignment']['problem_file'].split('/')[1].split('.')[0]  
@@ -34,6 +64,16 @@ class AggregatorLLM(base_llm.BaseLLM):
         )
    
     def create_message_content(self):
+        """ Creates the user prompt to be used for the aggregator LLM. The prompt
+        includes the problem statement, the program solution, the name of parameter 
+        being evaluated, followed by a list of all proposals from the first stage.
+        
+        Args:
+            None
+
+        Returns:
+            str: A string containing the user prompt for the aggregator LLM.
+        """
         problem_statement = self.read_file(self.problem_path)
         program_solution = self.read_file(self.solution_path)
 

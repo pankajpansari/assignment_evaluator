@@ -7,6 +7,15 @@ from pathlib import Path
 import yaml
 
 def load_config(config_path = 'config.yaml'):
+    """ Load the given configuration yaml file.
+
+    Args:
+        config_path: Path to the configuration file.
+            Default is config.yaml in the current directory. 
+    
+    Returns:
+        config: A dictionary containing the configuration settings.
+    """
     with open(config_path, 'r') as f:
         config = yaml.safe_load(f)
 
@@ -16,6 +25,15 @@ def load_config(config_path = 'config.yaml'):
     return config
 
 def _replace_env_vars(config):
+    """ Replace environment variable placeholders in the configuration.
+    These settings are used to store sensitive information such as API keys.
+
+    Args:
+        config: A dictionary containing the configuration settings.
+    
+    Returns:
+        None
+    """
     for key, value in config.items():
         if isinstance(value, dict):
             _replace_env_vars(value)
@@ -26,6 +44,17 @@ def _replace_env_vars(config):
 CONFIG = load_config()
 
 def parse_output(config):
+    """ Parse the output of the annotator to extract the annotated program 
+    file and explanation. The annotator was prompted to make use of <code> and 
+    <explanation> tags in its output. Here we use those tags to parse and write 
+    the annotated program and explanation to separate files.
+
+    Args:
+        config: A dictionary containing the configuration settings.
+
+    Returns:
+        None
+    """
     annotated_program = ''
     src = Path(CONFIG['assignment']['output_path']) / f"{CONFIG['assignment']['problem_file'].split('/')[1].split('.')[0]}_annotator_{CONFIG['annotator']['model']['type']}.txt"
     with open(src, 'r') as f:

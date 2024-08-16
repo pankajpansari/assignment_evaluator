@@ -25,7 +25,16 @@ import proposer_llm
 import utils
 
 def eval():
+    """Runs the program annotator evaluator on the given program assignment with 
+    respect to the parameters in the configuration file. Calls Proposer, Aggregator, 
+    and Annotator in sequence for each parameter and writes results to text files.
 
+    Args:
+        None
+
+    Returns:
+        None
+    """
     total_params = len(utils.CONFIG['parameters'])
     total_models = len(utils.CONFIG['proposers']['models'])
 

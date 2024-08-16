@@ -1,11 +1,16 @@
 assignment:
   problem_file: data/sort_argument.txt
   solution_file: data/sort_argument.cc
+  # Modify this to where you want the output to be saved
   output_path: output
+  # Modify this to where you want the intermediate files to be saved
   intermediate_path: intermediate
 
 proposers:
+  # Description of proposal task goes in this file
   system_prompt: prompts/system_proposer.txt
+  # Add as many or few models you want. Look up API for name,
+  # type is for your reference.
   models:
     - name: claude-3-haiku-20240307
       type: claude
@@ -17,18 +22,25 @@ proposers:
       type: gpt
 
 aggregator:
+  # Description of aggregator task goes in this file
   system_prompt: prompts/system_aggregator.txt
+  # There should be only one aggregator model
   model:
     name: claude-3-haiku-20240307
     type: claude
 
 annotator:
+  # Description of annotator task goes in this file
   system_prompt: prompts/system_annotator.txt
+  # There should be only one annotator model
   model:
     name: claude-3-haiku-20240307
     type: claude
 
 parameters:
+  # The names of the parameters on which we're evaluating the code quality.
+  # The respective prompt file describes the parameter in detail.
+  # Add as many or as few parameters as you want.
   - name: efficiency
     prompt_file: prompts/efficiency.txt
   - name: cleanliness
@@ -43,6 +55,7 @@ parameters:
     prompt_file: prompts/memory.txt
 
 api_keys:
+  # Placeholders for API keys. Please set them as environment variables.
   anthropic: ${ANTHROPIC_API_KEY}
   openai: ${OPENAI_API_KEY}
   together: ${TOGETHER_API_KEY}
