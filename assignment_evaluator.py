@@ -1,11 +1,11 @@
 # Copyright (c) Pankaj Pansari 
 #
-# This file is part of program annotator, which is licensed under the MIT License.
+# This file is part of CodeInsight, which is licensed under the MIT License.
 # See the LICENSE file for details.
 
-"""Main call script for the program annotator evaluator.
+"""Main call script for the CodeInsight evaluator.
 
-This script runs the program annotator evaluator (Proposer, Aggregator, and Annotator)
+This script runs the CodeInsight evaluator (Proposer, Aggregator, and Annotator)
 on the given program assignment with respect to the parameters in the configuration file. 
 
 Typical usage example:
@@ -26,7 +26,7 @@ import proposer_llm
 import utils
 
 def eval():
-    """Runs the program annotator evaluator on the given program assignment with 
+    """Runs the CodeInsight evaluator on the given program assignment with 
     respect to the parameters in the configuration file. Calls Proposer, Aggregator, 
     and Annotator in sequence for each parameter and writes results to text files.
 
@@ -77,7 +77,7 @@ if __name__ == '__main__':
     # Let's read the problem and solution files from the command line arguments
     parser = argparse.ArgumentParser(
         prog='assignment_evaluator.py',
-        description='Run the program annotator evaluator on the given program assignment.')
+        description='Run the CodeInsight evaluator on the given program assignment.')
     parser.add_argument('problem_file', type = str, help=f'Path to the problem file.')
     parser.add_argument('solution_file', type = str, help=f'Path to the program'
                         f'file to be annotated.')

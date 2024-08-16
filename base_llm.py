@@ -1,6 +1,6 @@
 # Copyright (c) 2024 Pankaj Pansari 
 #
-# This file is part of program annotator, which is licensed under the MIT License.
+# This file is part of CodeInsight, which is licensed under the MIT License.
 # See the LICENSE file for details.
 """ Module defines the BaseLLM class which is the base class for Proposer, Aggregator, and Annotator classes.
 
