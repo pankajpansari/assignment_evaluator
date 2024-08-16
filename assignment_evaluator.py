@@ -13,6 +13,7 @@ Typical usage example:
     $ python assignment_evaluator.py
 """
 
+import argparse
 import pathlib
 import shutil
 import time
@@ -72,6 +73,20 @@ def eval():
 
 if __name__ == '__main__':
     start_time = time.time()
+
+    # Let's read the problem and solution files from the command line arguments
+    parser = argparse.ArgumentParser(
+        prog='assignment_evaluator.py',
+        description='Run the program annotator evaluator on the given program assignment.')
+    parser.add_argument('problem_file', type = str, help=f'Path to the problem file.')
+    parser.add_argument('solution_file', type = str, help=f'Path to the program'
+                        f'file to be annotated.')
+    args = parser.parse_args()
+    utils.CONFIG['assignment']['problem_file'] = args.problem_file
+    utils.CONFIG['assignment']['solution_file'] = args.solution_file
+
     eval()
+
     end_time = time.time()
+
     print(f"\nTotal execution time: {end_time - start_time:.2f} seconds")

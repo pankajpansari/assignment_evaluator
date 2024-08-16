@@ -1,6 +1,4 @@
 assignment:
-  problem_file: data/sort_argument.txt
-  solution_file: data/sort_argument.cc
   # Modify this to where you want the output to be saved
   output_path: output
   # Modify this to where you want the intermediate files to be saved
