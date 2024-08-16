@@ -55,7 +55,7 @@ class AnnotatorLLM(base_llm.BaseLLM):
         self.parameter_prompt_path = f"{parameter['prompt_file']}"
         output_prefix = (
             utils.CONFIG['assignment']['problem_file']
-            .split('/')[1].split('.')[0]
+            .split('/')[-1].split('.')[0]
         )
         self.output_path = utils.CONFIG['assignment']['intermediate_path']
         if not os.path.exists(self.output_path):
@@ -78,7 +78,7 @@ class AnnotatorLLM(base_llm.BaseLLM):
         """
         problem_statement = self.read_file(self.problem_path)
         program_solution = self.read_file(self.solution_path)
-        output_prefix = utils.CONFIG['assignment']['problem_file'].split('/')[1].split('.')[0]  
+        output_prefix = utils.CONFIG['assignment']['problem_file'].split('/')[-1].split('.')[0]  
         aggregate_feedback = self.read_file(pathlib.Path(utils.CONFIG['assignment']['intermediate_path']) /
                                             (f"{output_prefix}_aggregator_{utils.CONFIG['aggregator']['model']['type']}"
                                             f"_{self.parameter}.txt"))

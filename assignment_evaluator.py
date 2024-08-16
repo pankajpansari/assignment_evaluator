@@ -61,7 +61,7 @@ def eval():
         src = pathlib.Path(annotator.output_path) / pathlib.Path(annotator.output_filename)
         dest = (
             pathlib.Path(utils.CONFIG['assignment']['output_path']) /
-            f"{utils.CONFIG['assignment']['problem_file'].split('/')[1].split('.')[0]}"
+            f"{utils.CONFIG['assignment']['problem_file'].split('/')[-1].split('.')[0]}"
             f"_annotator_{utils.CONFIG['annotator']['model']['type']}.txt"
         )
         shutil.copyfile(src, dest)    

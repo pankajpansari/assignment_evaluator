@@ -54,7 +54,7 @@ class AggregatorLLM(base_llm.BaseLLM):
         """
         super().__init__(model, parameter)
         self.system_prompt_path = f"{utils.CONFIG['aggregator']['system_prompt']}"
-        output_prefix = utils.CONFIG['assignment']['problem_file'].split('/')[1].split('.')[0]  
+        output_prefix = utils.CONFIG['assignment']['problem_file'].split('/')[-1].split('.')[0]  
         self.output_path = utils.CONFIG['assignment']['intermediate_path']
         if not os.path.exists(self.output_path):
             os.makedirs(self.output_path)
@@ -78,7 +78,7 @@ class AggregatorLLM(base_llm.BaseLLM):
         program_solution = self.read_file(self.solution_path)
 
         proposals = []
-        output_prefix = utils.CONFIG['assignment']['problem_file'].split('/')[1].split('.')[0]  
+        output_prefix = utils.CONFIG['assignment']['problem_file'].split('/')[-1].split('.')[0]  
         for model in utils.CONFIG['proposers']['models']:
             proposals.append(self.read_file(pathlib.Path(self.output_path) / 
                                             f"{output_prefix}_proposer_{model['type']}"

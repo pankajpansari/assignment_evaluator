@@ -56,7 +56,7 @@ def parse_output(config):
         None
     """
     annotated_program = ''
-    src = Path(CONFIG['assignment']['output_path']) / f"{CONFIG['assignment']['problem_file'].split('/')[1].split('.')[0]}_annotator_{CONFIG['annotator']['model']['type']}.txt"
+    src = Path(CONFIG['assignment']['output_path']) / f"{CONFIG['assignment']['problem_file'].split('/')[-1].split('.')[0]}_annotator_{CONFIG['annotator']['model']['type']}.txt"
     with open(src, 'r') as f:
         flag = 0
         for line in f:
@@ -68,7 +68,7 @@ def parse_output(config):
             if flag == 1:
                 annotated_program += line
     
-    dest = Path(CONFIG['assignment']['output_path']) / f"{CONFIG['assignment']['problem_file'].split('/')[1].split('.')[0]}.c"
+    dest = Path(CONFIG['assignment']['output_path']) / f"{CONFIG['assignment']['problem_file'].split('/')[-1].split('.')[0]}.c"
     with open(dest, 'w') as f:
         f.write(annotated_program)
 
@@ -84,7 +84,7 @@ def parse_output(config):
             if flag == 1:
                 explanation += line
     
-    dest = Path(CONFIG['assignment']['output_path']) / f"{CONFIG['assignment']['problem_file'].split('/')[1].split('.')[0]}_explanation.txt"
+    dest = Path(CONFIG['assignment']['output_path']) / f"{CONFIG['assignment']['problem_file'].split('/')[-1].split('.')[0]}_explanation.txt"
     with open(dest, 'w') as f:
         f.write(explanation)
 
