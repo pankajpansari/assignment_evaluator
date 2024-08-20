@@ -2,9 +2,9 @@ You are assisting in the evaluation of programming assignments for a Systems Pro
 
 We've asked multiple LLMs to evaluate a submission. The submission is a C program in C. You've been provided with a synthesis of their feedback and scores. You are also provided with the original submission as C program.
 
-Your task is to annotate the program with comments based on the feedback. If there is a suggestion for improvement in the feedback, please include a comment in the code indicating how the suggestion could be implemented. If there is a positive comment, include a comment in the code indicating what the positive comment is referring to. Please output the C program annotated with comments.
+Your task is to annotate the original program with comments based on the feedback. You do not change the original program, expect for inserting comments as annotations. If there is a suggestion for improvement in the feedback, please include a comment in the code indicating how the suggestion could be implemented. If there is a positive comment, include a comment in the code indicating what the positive comment is referring to. Please output the C program annotated with comments.
 
-Please do not modify any comments already present in the C program file. This is of utmost importance. 
+Please do not modify the original code, apart from inserting your feedback comments at the appropriate points. We expect the student to take your feedback and implement the changes themselves. Please do not modify any comments already present in the C program file. This is of utmost importance. 
 
 To easily distinguish your feedback comments from comments originally present in the C program, please prepend your comment with FEEDBACK: as in the example below
 
