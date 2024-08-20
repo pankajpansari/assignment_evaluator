@@ -73,6 +73,11 @@ def eval():
 
 
     utils.parse_output(utils.CONFIG)
+   
+    if not utils.CONFIG['debug']:
+        # Delete the folder containing intermediate files
+        shutil.rmtree(pathlib.Path(utils.CONFIG['assignment']['intermediate_path']))
+
     print("\nAll parameters processed. Evaluation complete.")
 
 if __name__ == '__main__':
