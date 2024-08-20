@@ -17,6 +17,7 @@ Typical usage example:
 import os
 import pathlib
 
+import anthropic
 import base_llm
 import utils
 
@@ -58,10 +59,7 @@ class AggregatorLLM(base_llm.BaseLLM):
         self.output_path = utils.CONFIG['assignment']['intermediate_path']
         if not os.path.exists(self.output_path):
             os.makedirs(self.output_path)
-        self.output_filename = (
-            f"{output_prefix}_aggregator_{model['type']}"
-            f"_{self.parameter}.txt"
-        )
+        self.output_filename = f"{output_prefix}_aggregator_{model['type']}.txt"
    
     def create_message_content(self):
         """ Creates the user prompt to be used for the aggregator LLM. The prompt
@@ -89,7 +87,33 @@ class AggregatorLLM(base_llm.BaseLLM):
             proposal_prompt += f"<data> {proposal} </data>\n\n"
 
         return (f"<problem> {problem_statement} \n\n"
-                f"<instruction> Parameter to assess : {self.parameter} "
-                f"</problem> \n\n"  # no parameter prompt; parameter name is enough
+                f"<instruction> Parameter to assess : {self.parameter} " # no parameter prompt; parameter name is enough
+                f"</problem> \n\n"  
                 f"<code> {program_solution} </code> \n\n"
                 f"<proposals> {proposal_prompt} </proposals>")
+    
+    def write_output(self, response, output_filename):
+        """ Append the output to a file.
+
+        Args:
+            response: An object of type Messages or ChatCompletion containing 
+            the response from the model.
+            output_filename: A string containing the name of the output file.
+            The filename remains the same for all parameters.
+
+        Returns:
+            None
+        """
+        output_file = pathlib.Path(self.output_path) / output_filename 
+        if isinstance(self.get_client(), anthropic.Anthropic):
+            content = response.content[0].text
+        else:
+            content = response.choices[0].message.content
+
+        os.makedirs(output_file.parent, exist_ok=True)
+        with open(output_file, 'a', encoding = 'utf-8') as f:
+            f.write(f"{self.model['name']}\n")
+            f.write(f"{self.parameter}\n")
+            f.write(content)
+            f.write("\n\n")
+
