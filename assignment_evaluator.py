@@ -79,11 +79,11 @@ if __name__ == '__main__':
         prog='assignment_evaluator.py',
         description='Run the CodeInsight evaluator on the given program assignment.')
     parser.add_argument('problem_file', type = str, help=f'Path to the problem file.')
-    parser.add_argument('solution_file', type = str, help=f'Path to the program'
+    parser.add_argument('program_file', type = str, help=f'Path to the program'
                         f'file to be annotated.')
     args = parser.parse_args()
     utils.CONFIG['assignment']['problem_file'] = args.problem_file
-    utils.CONFIG['assignment']['solution_file'] = args.solution_file
+    utils.CONFIG['assignment']['program_file'] = args.program_file
 
     eval()
 

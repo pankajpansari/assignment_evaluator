@@ -31,7 +31,7 @@ class BaseLLM:
         parameter: A dictionary containing the parameter name and the path to
             the respective prompt file which describes the parameter.
         problem_path: A string containing the path to the problem file. (from config file)
-        solution_path: A string containing the path to the solution file. (from config file)
+        program_path: A string containing the path to the solution file. (from config file)
         output_path: A string listing the directory where the result is saved. (from config file)
     """
     def __init__(self, model, parameter):
@@ -49,7 +49,7 @@ class BaseLLM:
         self.model = model
         self.parameter = parameter['name']
         self.problem_path = utils.CONFIG['assignment']['problem_file']
-        self.solution_path = utils.CONFIG['assignment']['solution_file']
+        self.program_path = utils.CONFIG['assignment']['program_file']
         self.output_path = utils.CONFIG['assignment']['output_path']
         os.makedirs(self.output_path, exist_ok=True)
 
@@ -148,6 +148,7 @@ class BaseLLM:
             f.write(f"{self.model['name']}\n")
             f.write(f"{self.parameter}\n")
             f.write(content)
+            f.write("\n\n")
 
     def run(self):
         """ Calls class methods to get the client object, model response, 

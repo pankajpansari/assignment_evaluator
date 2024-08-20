@@ -73,7 +73,7 @@ class AggregatorLLM(base_llm.BaseLLM):
             str: A string containing the user prompt for the aggregator LLM.
         """
         problem_statement = self.read_file(self.problem_path)
-        program_solution = self.read_file(self.solution_path)
+        program_solution = self.read_file(self.program_path)
 
         proposals = []
         output_prefix = utils.CONFIG['assignment']['problem_file'].split('/')[-1].split('.')[0]  

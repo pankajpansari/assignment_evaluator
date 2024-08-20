@@ -74,7 +74,7 @@ class ProposerLLM(base_llm.BaseLLM):
             A string containing the user prompt for the proposer LLM.
         """
         problem_statement = self.read_file(self.problem_path)
-        program_solution = self.read_file(self.solution_path)
+        program_solution = self.read_file(self.program_path)
         parameter_prompt = self.read_file(self.parameter_prompt_path)
 
         return (f"<problem> {problem_statement} </problem> \n\n"
