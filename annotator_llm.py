@@ -11,7 +11,7 @@ summary of the feedback is also generated.
 Typical usage example:
     
         import annotator_llm
-        annotator = annotator_llm.AnnotatorLLM(model, parameter)
+        annotator = annotator_llm.AnnotatorLLM(model)
         annotator.run()
 """
 
@@ -34,25 +34,21 @@ class AnnotatorLLM(base_llm.BaseLLM):
             what the annotator is expected to do.
         output_path: A string listing the directory where the annotated result is saved.
         output_filename: A string giving the filename of result. The filename indicates
-            the program name (being evaluated) and the parameter name.
+            the program name (being evaluated).
     """
-    def __init__(self, model, parameter):
+    def __init__(self, model):
         """ Initializes the instance based on CONFIG settings; also sets which
-        LLM acts as annotator and which parameter is being evaluated (derived
-        from parent).
+        LLM acts as annotator (derived from parent).
         
         Args:
             model: A dictionary containing the model name (eg. claude-3-haiku-20240307)
                 and type (eg. claude)
-            parameter: A dictionary containing the parameter name and the path to
-                the respective prompt file which describes the parameter.
         
         Returns:
             None
         """
-        super().__init__(model, parameter)
+        super().__init__(model, {'name': "", 'prompt_file': ""})
         self.system_prompt_path = f"{utils.CONFIG['annotator']['system_prompt']}" 
-        self.parameter_prompt_path = f"{parameter['prompt_file']}"
         output_prefix = (
             utils.CONFIG['assignment']['problem_file']
             .split('/')[-1].split('.')[0]
@@ -61,7 +57,7 @@ class AnnotatorLLM(base_llm.BaseLLM):
         if not os.path.exists(self.output_path):
             os.makedirs(self.output_path)
         self.output_filename = (f"{output_prefix}_annotator_"
-                                f"{model['type']}_{parameter['name']}.txt")
+                                f"{model['type']}.txt")
 
     def create_message_content(self):
         """ Creates the user prompt to be used for the annotator LLM. The prompt
@@ -80,8 +76,8 @@ class AnnotatorLLM(base_llm.BaseLLM):
         program_solution = self.read_file(self.program_path)
         output_prefix = utils.CONFIG['assignment']['problem_file'].split('/')[-1].split('.')[0]  
         aggregate_feedback = self.read_file(pathlib.Path(utils.CONFIG['assignment']['intermediate_path']) /
-                                            (f"{output_prefix}_aggregator_{utils.CONFIG['aggregator']['model']['type']}"
-                                            f"_{self.parameter}.txt"))
+                                            (f"{output_prefix}_aggregator_"
+                                             f"{utils.CONFIG['aggregator']['model']['type']}.txt"))
 
         return (f"<problem> {problem_statement} </problem> \n\n"
                 f"<code> {program_solution} </code> \n\n"

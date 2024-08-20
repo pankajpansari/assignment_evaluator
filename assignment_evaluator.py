@@ -24,6 +24,8 @@ import aggregator_llm
 import annotator_llm
 import proposer_llm
 import utils
+import sys
+import subprocess
 
 def eval():
     """Runs the CodeInsight evaluator on the given program assignment with 
@@ -54,19 +56,21 @@ def eval():
         aggregator = aggregator_llm.AggregatorLLM(utils.CONFIG['aggregator']['model'], parameter)
         aggregator.run()
 
-        print("Running Annotator")
-        annotator = annotator_llm.AnnotatorLLM(utils.CONFIG['annotator']['model'], parameter)
-        annotator.run()
-
-        src = pathlib.Path(annotator.output_path) / pathlib.Path(annotator.output_filename)
-        dest = (
-            pathlib.Path(utils.CONFIG['assignment']['output_path']) /
-            f"{utils.CONFIG['assignment']['problem_file'].split('/')[-1].split('.')[0]}"
-            f"_annotator_{utils.CONFIG['annotator']['model']['type']}.txt"
-        )
-        shutil.copyfile(src, dest)    
-
         print(f"\nParameter {parameter['name']} completed ({param_index + 1}/{total_params})\n")
+
+   # Run the annotator on the merged aggregated output for all parameters
+    print("Running Annotator")
+    annotator = annotator_llm.AnnotatorLLM(utils.CONFIG['annotator']['model'])
+    annotator.run()
+
+    src = pathlib.Path(annotator.output_path) / pathlib.Path(annotator.output_filename)
+    dest = (
+        pathlib.Path(utils.CONFIG['assignment']['output_path']) /
+        f"{utils.CONFIG['assignment']['problem_file'].split('/')[-1].split('.')[0]}"
+        f"_annotator_{utils.CONFIG['annotator']['model']['type']}.txt"
+    )
+    shutil.copyfile(src, dest)    
+
 
     utils.parse_output(utils.CONFIG)
     print("\nAll parameters processed. Evaluation complete.")
