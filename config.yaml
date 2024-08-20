@@ -10,13 +10,13 @@ proposers:
   # Add as many or few models you want. Look up API for name,
   # type is for your reference.
   models:
-    - name: claude-3-haiku-20240307
+    - name: claude-3-5-sonnet-20240620
       type: claude
-    - name: mistralai/Mistral-7B-Instruct-v0.3
+    - name: mistralai/Mixtral-8x22B-Instruct-v0.1
       type: mixtral
-    - name: meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo
+    - name: meta-llama/Meta-Llama-3.1-405B-Instruct-Turbo
       type: llama
-    - name: gpt-4o-mini
+    - name: gpt-4o
       type: gpt
 
 aggregator:
@@ -24,7 +24,7 @@ aggregator:
   system_prompt: prompts/system_aggregator.txt
   # There should be only one aggregator model
   model:
-    name: claude-3-haiku-20240307
+    name: claude-3-5-sonnet-20240620
     type: claude
 
 annotator:
@@ -32,7 +32,7 @@ annotator:
   system_prompt: prompts/system_annotator.txt
   # There should be only one annotator model
   model:
-    name: claude-3-haiku-20240307
+    name: claude-3-5-sonnet-20240620
     type: claude
 
 parameters:
@@ -59,4 +59,4 @@ api_keys:
   together: ${TOGETHER_API_KEY}
 
 # Setting to true keeps the intermediate files for inspection
-debug: true
+debug: false
