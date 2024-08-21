@@ -1,0 +1,108 @@
+C Programs
+From C Programming Language by Brian W. Kernighan and Dennis M. Ritchie
+
+prog_1.c
+Chapter_6:exercise_3
+Write a cross-referencer that prints a list of all words in a document, and, for each word, a list of the line numbers on which it occurs. Remove noise words like "the", "and," and so on.
+
+prog_2.c
+Chapter_5:exercise_10
+Write the program expr , which evaluates a reverse Polish expression from the command line, where each operator or operand is a separate argument. For example,
+expr 2 3 4 + *
+evaluates 2 X (3 + 4).
+
+prog_3.c
+Chapter_3:exercise_5
+Write the function itob(n,s,b) that converts the integer n into a base b character representation in the string s . In particular, itob(n,s,16) formats n as a hexadecimal integer in s.
+
+prog_4.C
+Chapter_1:exercise_8
+ Write a program to count blanks, tabs, and newlines.
+
+prog_5.C
+Chapter_2:exercise_6
+Write a function setbits(x,p,n,y) that returns x with the n bits that begin at position p set to the rightmost n bits of y, leaving the other bits unchanged.
+
+prog_6.C
+Chapter_4:exercise_7
+Write a routine ungets(s) that will push back an entire string onto the input. Should ungets know about buf and bufp , or should it just use ungetch?
+
+prog_7.C
+Chapter_7:exercise_1
+Write a program that converts upper case to lower or lower case to upper, depending on the name it is invoked with, as found in argv[0].
+
+prog_8.C
+Chapter_1:exercise_12
+Write a program that prints its input one word per line.
+
+prog_9.C
+Chapter_2:exercise_5
+Write the function any(s1,s2) , which returns the first location in the string s1 where any character from the string s2 occurs, or -1 if s1 contains no characters from s2 . (The standard library function strpbrk does the same job but returns a pointer to the location.)
+
+prog_10.C
+Chapter_3:exercise_3
+Write a function expand(s1,s2) that expands shorthand notations like a-z in the string s1 into the equivalent complete list abc...xyz in s2 . Allow for letters of either case and digits, and be prepared to handle cases like a-b-c and a-z0-9 and -a-z . Arrange that a leading or trailing - is taken literally.
+
+prog_11.C
+Chapter_4:exercise_1
+Write the function strrindex(s,t) , which returns the position of the rightmost occurrence of t in s , or -1 if there is none.
+
+prog_12.C
+Chapter_5:exercise_13
+Write the program tail, which prints the last n lines of its input. By default, n is 10, say, but it can be changed by an optional argument, so that
+  tail -n
+prints the last n lines. The program should behave rationally no matter how unreasonable the input or the value of n. Write the program so it makes the best use of available storage; lines should be stored as in the sorting program of Section 5.6, not in a two-dimensional array of fixed size.
+
+prog_13.C
+Chapter_6:exercise_4
+Write a program that prints the distinct words in its input sorted into decreasing order of frequency of occurrence. Precede each word by its count.
+
+prog_14.C
+Chapter_1:exercise_19
+Write a function reverse(s) that reverses the character string s . Use it to write a program that reverses its input a line at a time. 
+
+prog_15.C
+Chapter_1:exercise_23
+Write a program to remove all comments from a C program. Don't forget to handle quoted strings and character constants properly. C comments do not nest. 
+
+prog_16.c:
+Chapter_3:exercise_2
+Write a function escape(s,t) that converts characters like newline and tab into visible escape sequences like \n and \t as it copies the string t to s . Use a switch . Write a function for the other direction as well, converting escape sequences into the real characters.
+
+prog_17.C
+Chapter_5:exercise_4
+Write the function strend(s,t) , which returns 1 if the string t occurs at the end of the string s , and zero otherwise.
+
+prog_18.C
+Chapter_7:exercise_1
+Write a program that converts upper case to lower or lower case to upper, depending on the name it is invoked with, as found in argv[0].
+
+prog_19.C
+Chapter_1:exercise_13
+Write a program to print a histogram of the lengths of words in its input. It is easy to draw the histogram with the bars horizontal; a vertical orientation is more challenging.
+
+prog_20.C
+Chapter_2:exercise_8
+Write a function rightrot(x,n) that returns the value of the integer x rotated to the right by n positions.
+
+C Programs
+
+prog_21.C
+https://github.com/AllAlgorithms/c/blob/master/algorithms/dynamic-programming/dijkstras_algorithem.c
+Dijkstra's Algorithm
+
+prog_22.C
+https://github.com/AllAlgorithms/c/blob/master/algorithms/dynamic-programming/knapsack0-1.c
+0-1 Knapsack Problem
+
+prog_23.C
+https://github.com/AllAlgorithms/c/blob/master/algorithms/graphs/kruskals.c
+Kruskal's Algorithm
+
+prog_24.C
+https://github.com/justin-lathrop/c/tree/master/List
+Linked list
+
+prog_25.C
+https://github.com/justin-lathrop/c/tree/master/HashTable
+Hash Table

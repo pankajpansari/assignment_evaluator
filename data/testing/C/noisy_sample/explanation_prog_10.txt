@@ -1,0 +1,25 @@
+The modifications made to degrade the code quality include:
+
+1. Cleanliness and readability:
+   - Renamed functions and variables to single letters (e, a, m, f, t, l).
+   - Removed all comments.
+   - Used goto statements in the 'm' function, making the control flow harder to follow.
+
+2. Efficiency:
+   - Introduced a global buffer (g_buf) that's dynamically allocated and reallocated, which is unnecessary for this task.
+   - Added redundant memory allocations and deallocations.
+
+3. Language conventions:
+   - Used non-standard naming conventions for functions and variables.
+   - Mixed different coding styles (e.g., braces placement).
+
+4. Memory management:
+   - Introduced manual memory management with malloc, realloc, and free, which is prone to errors and leaks.
+   - Used a global variable (g_size) to track buffer size.
+
+5. Overall design:
+   - Changed the function signatures, making them less clear and potentially harder to use.
+   - Introduced global variables, reducing encapsulation.
+   - Used goto statements instead of structured programming constructs.
+
+These changes make the code significantly harder to read, understand, and maintain while still preserving its core functionality.

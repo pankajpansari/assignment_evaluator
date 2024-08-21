@@ -1,0 +1,17 @@
+The feedback highlights several areas for improvement in the code:
+
+1. Function and variable naming: The functions 'f' and 'r' should be renamed to more descriptive names like 'convertBase' and 'reverseString'. The global variable 'g_d' could be renamed to 'digits'.
+
+2. Global variables: The use of global variables 'g_d' and 'g_l' is discouraged. Consider passing these as parameters or defining them within the functions that use them.
+
+3. Goto statements: Replace goto statements with more structured programming constructs for better readability and maintainability.
+
+4. Error handling: Consider returning an error code instead of exiting the program on error.
+
+5. Array size: The size of the 'b' array in main() could be increased to handle larger representations in different bases.
+
+6. Pointer arithmetic vs array indexing: The code mixes these two approaches. It's suggested to stick to one style, preferably array subscripts for better readability.
+
+7. Comments: The code would benefit from more comments explaining its functionality.
+
+Overall, while the core algorithm is efficient and the program demonstrates good use of pointers and memory management, there are several opportunities to improve code clarity, maintainability, and adherence to modern C programming practices.

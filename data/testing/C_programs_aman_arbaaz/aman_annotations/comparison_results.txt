@@ -1,0 +1,30 @@
+File: prog_1.c
+<output>2</output>
+
+File: prog_2.c
+<output>1</output>
+
+File: prog_10.c
+<output>2</output>
+
+File: prog_3.c
+<output>1</output>
+
+File: prog_4.c
+<output>1</output>
+
+File: prog_5.c
+<output>1</output>
+
+File: prog_6.c
+<output>2</output>
+
+File: prog_7.c
+<output>1</output>
+
+File: prog_8.c
+<output>2</output>
+
+File: prog_9.c
+<output>1</output>
+
