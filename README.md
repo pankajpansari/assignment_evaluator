@@ -1,15 +1,41 @@
-## Automatic Grading of Lab Programming Assignments using Llama-3 LLM
+![logo](./logo.png)
 
-The code here has been written with a view to assist our TAs in grading lab programming assignments for the Fundamentals of Computer Systems undergraduate course at Plaksha university. These assignments are in C. There are two axes along which a submission is graded: functionality and quality of code. We use an agent-based approach using state-of-the-art large language models (LLMs) to accurate, consistently, and reliably provide feedback about the quality of the submission.
+-----
+CodeInsight is a tool that makes use of large language models (LLMs) to provide feedback on student submissions for programming assignments. Its feedback takes the form of annotations in the form of comments insert at appropriate points in the student program. 
 
-### **Functionality**
-The functionality of the code is going to be tested on a comprehensive set of test-cases. The output of the submission is compared with the expected output for each test case. This part is relatively easy to automate by writing appropriate autotester, though coming up with a good test suite is challenging. The test suite should ensure a mix of sanity checks, comprehensive coverage, robustness checks and stress tests. We defer the use of LLMs to generate good test suite for the time being.
+Please note that this tool does not evaluate the correctness of implementation. That is usually done by carefully-designed test cases.
 
-### **Quality of Code**
+![original_program](./left_code.png)
+![annotated_feedback](./right_code.png)
 
-The first component of feedback of the quality of code comes from a clean compile and clean run under valgrind. It is easy to automate for these quality metrics. The second and most important component of quality feedback is the TA's commentary from the code review. It is this component that we seek to automate using LLMs. The parameters for grading are as follows:
+### Usage
 
-1. Reasonable efficiency: Though the runtime and memory usage of a program can be gauged using benchmark tests, we can a different approach to save effort. We seek to use the judgement of LLMs to decide when the submission is grossly inefficient in its implementation. We note that this is in addition to the hard timeout constraints in functionality testing. 
+After cloning the repository, please install the required packages using the following command:
+
+```bash
+pip install -r requirements.txt
+```
+You'll need API keys to make calls to LLMs on Anthropic, OpenAI and Together.ai services. For this, please set these keys as environment variables `$ANTHROPIC_API_KEY` `$OPENAI_API_KEY` and `$TOGETHER_API_KEY` respectively; CodeInsight will pick up these key values from the environment.
+
+Finally, to run the tool, use the following command:
+
+```bash
+python3 assignment_evaluator.py <path_to_problem_statement_txt> <path_to_student_code_c> 
+```
+example:
+
+```bash
+python3 assignment_evaluator.py data/sort_arguments.txt data/sort_arguments.cc
+```
+To run over a batch of programs, please use `generate_annotations.py` script.
+
+**Configuration** - You can set the number of proposers and types of LLMs by changing the `config.yaml` file. You can even add/delete the parameters of evaluations using this `yaml` file. To add a parameter, simply add the appropriate system prompt `.txt` file to `/prompts`.
+
+### Parameters of Evaluation
+
+CodeInsight provides qualitative feedback on the following parameters:
+
+1. Reasonable efficiency
 
 2. Cleanliness/readability
 
@@ -21,17 +47,41 @@ The first component of feedback of the quality of code comes from a clean compil
 
 6. Pointers/memory
 
-Each of these parameters are scored on a scale of 0-10. Adding in the grade out of 10 for clean compile and valgrind run (5 + 5), we take an average of these scores. For the code review, we also return the code marked up with comments generated from LLM feedback. This individualized feedback on the code quality will highlight opportunities for future improvement and commend the students' successes.
+To understand details about these parameters, please consults the respective prompts under the `/prompts` folder. 
+
+Our implementation has been inspired by the evaluation rubrics given [here](https://web.stanford.edu/class/archive/cs/cs107/cs107.1166/advice_assigngrade.html).
 
 ### Technical Details
 
-The success of automated grading of code quality hinges on these factors:
+CodeInsight takes a [mixture-of-agents](https://arxiv.org/abs/2406.04692) approach. The system is divided into three main components:
 
-1. Quality and detail of rubrics for each of the parameters: We need to be precise and detailed about what we are looking for in each of the parameters.
+1. **Proposers** - These LLMs identify issues with the student submission and summarize them. Since a single LLM may not be able to capture all the issues and its proposed issues may not always be correct, we use multiple LLMs to propose issues. Proposers send LLM request for each parameter separately.
 
-2. Quality of the LLMs: Due to the complexity of the assignments, we need to make use of the best LLMs we can. This necessitates the use of LLMs with largest parameter counts available to us. We choose to use a mix of Llama 3.1 405B Instruct Turbo, GPT-4o, Mixtral-8x22B Instruct (141B), and Claude 3.5 Sonnet.
+    In our implementation, we use 4 proposers: `Claude-3.5-Sonnet`, `GPT-4o`, `Mixtral-8x22B`, and `Llama-3.1-405B`.
 
-3. Mixture of Agents approach: We aggregrate the responses from multiple LLMs to get a more robust and reliable feedback. The multiple feedbacks help us estimate uncertainty; this enables manual intervention in cases where the feedback is conflicting. We also make use of a code completion LLM to insert comments in the original code at appropriate places.
+2. **Aggregator** - This component takes in the proposed feedback of all the proposers and decides which issues to include in the final feedback. We make call to Aggregator for each parameter separately.
+
+    In our implementation, we use Claude-3.5-Sonnet as the aggregator.
+
+3. **Annotator** - This component takes the final feedback from the aggregator and inserts it into the student's code. The annotator is responsible for inserting the feedback at the appropriate locations in the student's code. This is done for all the parameters together in one shot.
+
+    In our implementation, we use `Claude-3.5-Sonnet` as the annotator.
+
+![architecture](./system_diagram.png)
+
+In addition, we have a final component:
+
+**Comparator** - It makes a call to `Claude-3.5-Sonnet` to compare the quality of two different feedback outputs. This is used to compare the quality of feedback generated by CodeInsight with the feedback generated by a good human programmer.
+
+### Comparison with Human Feedback
+
+We compare the quality of feedback generated by CodeInsight with the feedback generated by two competent human programmers over a set of 10 C programs (these can be found in `/data/testing/`).
+
+We found that CodeInsight does equally well as the competent human programmers with an average win-rate of 5-5 over the 10 programs.
+
+### Acknowledgements
+
+I would like to thank Aman Paliwal and Arbaaz Shafiq, undergraduate students at Plaksha University, for providing diligent feedback on the test C programs for comparison of performance.
 
 ## License
 
