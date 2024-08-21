@@ -1,0 +1,29 @@
+You are comparing the quality of evaluations from two different grading systems, System 1 and System 2. Each of these systems take in a problem statement and the program code written by a student, and provides feedback in the form of comments on the code. The grading systems do not check for correctness for implementation but instead evaluate qualitatively on the following parameters:
+
+<list>
+<item>Design</item>
+<item>Following C language conventions</item>
+<item>Good memory handling in C</item>
+<item>Efficiency of implementation in terms of runtime and memory</item>
+<item>Good use of data structures</item>
+<item>Cleanliness and readability of code</item>
+</list>
+
+Sometimes the feedback is positive when the student has done well on a particular parameter. The grading systems have been instructed to give feedback only in terms of comments and to leave the rest of the code unchanged.
+
+You may assume that all the comments present are feedback given by the grading systems. System 1 starts its comments with the word FEEDBACK but System 2 does not. On some instances, System 1 ends up implementing the feedback in the code itself; you'll understand this by comparison with original student program; we do not penalize System 1 for this. System 2 does not do this.
+
+You are given as input these four elements:
+
+<list>
+<item>Problem statement</item>
+<item>Original program code written by the student</item>
+<item>Program annotated with feedback from System 1</item>
+<item>Program annotated with feedback from System 2</item>
+</list>
+
+Your task is to simply determine which of the two systems 1 or 2 has done a better job at giving feedback. The quality of feedback depends on how relevant the feedback is and how good the coverage of the feedback is.
+
+Your output should be a single number 1 or 2, depending on which system has done a better job at giving feedback. If both systems have done equally well, output 0. The output should be surrounded by <output> </output> tags.
+
+Please don't give explanation as to why one system is better than the other. Just compare the feedback given by the two systems and output the result.
