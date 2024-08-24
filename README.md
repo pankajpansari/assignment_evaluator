@@ -1,7 +1,7 @@
 ![logo](./logo.png)
 
 -----
-CodeInsight is a tool that makes use of large language models (LLMs) to provide feedback on student submissions for programming assignments. Its feedback takes the form of annotations in the form of comments insert at appropriate points in the student program. 
+CodeInsight is a tool that makes use of large language models (LLMs) to provide feedback on student submissions for programming assignments. Its feedback takes the form of annotations (code comments) inserted at appropriate points in the student program. 
 
 Please note that this tool does not evaluate the correctness of implementation. That is usually done by carefully-designed test cases.
 
